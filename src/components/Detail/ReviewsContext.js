@@ -1,9 +1,25 @@
-import { useState, createContext, useContext } from 'react';
+import { useReducer, createContext, useContext } from 'react';
 
-export const ReviewsContext = createContext(null);
+const ReviewsContext = createContext(null);
 
-const ReviewsContextProvider = ({ children }) => {
-  const [reviews, setReviews] = useState([]);
+const initialState = {
+  reviews: [],
+};
+
+const reducer = (state, action) => {
+  console.log({ state, action });
+  switch (action.type) {
+    case 'setReviews':
+      return {
+        reviews: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const ReviewsContextProvider = ({ children }) => {
+  const [{ reviews }, dispatch] = useReducer(reducer, initialState);
 
   const getReviews = async (hotelId) => {
     try {
@@ -12,8 +28,8 @@ const ReviewsContextProvider = ({ children }) => {
       );
       const dataJSON = await data.json();
 
-      if (data) {
-        setReviews(dataJSON);
+      if (dataJSON) {
+        dispatch({ type: 'setReviews', payload: dataJSON });
       }
     } catch {}
   };
@@ -38,4 +54,4 @@ export const useReviewsContext = () => {
   };
 };
 
-export default ReviewsContextProvider;
+export default ReviewsContext;

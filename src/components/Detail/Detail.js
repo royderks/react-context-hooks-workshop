@@ -19,9 +19,13 @@ const Alert = styled.span`
   text-align: center;
 `;
 
-const Detail = ({ match, history }) => {
-  const { loading, error, hotels } = useHotelsContext();
+const Detail = ({ match, history }) => {  
+  const { loading, error, hotels, getHotels } = useHotelsContext();
   const { reviews, getReviews } = useReviewsContext();
+
+  useEffect(() => {
+    (!hotels || !hotels.length) && getHotels();
+  }, [getHotels, hotels]);
 
   const hotel =
     hotels && hotels.find((hotel) => hotel.id.toString() === match.params.id);
