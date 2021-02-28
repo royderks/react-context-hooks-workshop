@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header/Header';
@@ -30,7 +29,7 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={Hotels} />
         <Route path='/hotel/:id/new' component={Form} />
-        <Route path='/hotel/:id' component={Detail} />
+        <Route path='/hotel/:id' render={(props) => <Detail {...props}/> } />
       </Switch>
     </AppWrapper>
   </>

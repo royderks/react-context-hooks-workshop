@@ -34,7 +34,7 @@ const Hotels = ({ history }) => {
         );
         const dataJSON = await data.json();
 
-        if (data) {
+        if (dataJSON) {
           setHotels(dataJSON);
         }
       } catch {
@@ -44,8 +44,8 @@ const Hotels = ({ history }) => {
       setLoading(false);
     }
 
-    fetchData();
-  });
+    !hotels.length && fetchData();
+  }, [hotels.length]);
 
   return !loading && !error ? (
     <>
@@ -53,7 +53,7 @@ const Hotels = ({ history }) => {
       <HotelItemsWrapper>
         {hotels &&
           hotels.map((hotel) => (
-            <HotelLink key={hotel.id} to={`hotel/${hotel.id}`}>
+            <HotelLink key={hotel.id} to={`hotel/${hotel.id}`} hotel={hotel}>
               <HotelItem data={hotel} />
             </HotelLink>
           ))}
