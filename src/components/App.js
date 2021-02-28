@@ -30,7 +30,7 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={Hotels} />
         <Route path='/hotel/:id/new' component={Form} />
-        <Route path='/hotel/:id' component={Detail} />
+        <Route path='/hotel/:id' render={(props) => <Detail {...props}/> } />
       </Switch>
     </AppWrapper>
   </>

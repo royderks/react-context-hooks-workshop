@@ -4,8 +4,8 @@
     { "id": 2, "hotelId": 1, "title": "Very clean", "description": "Duis blandit, dolor sed posuere sodales, diam lorem tempor libero, at vestibulum turpis nisl porttitor enim. Cras accumsan felis orci, a sagittis lectus porta ut.", "rating": 4 }
   ],
   "hotels": [
-    { "id": 1, "title": "Beachfront Hotel (***)", "thumbnail": "assets/beachfront-hotel.jpg" },
-    { "id": 2, "title": "Forest Apartments (**)", "thumbnail": "assets/forest-apartments.jpg" }
+    { "id": 1, "title": "Beachfront Hotel (***)", "thumbnail": "/assets/beachfront-hotel.jpg" },
+    { "id": 2, "title": "Fairytail castle (*****)", "thumbnail": "https://picsum.photos/id/1040/400/400" }
   ],
   "listings": [
     { "id": 1, "title": "Canalside house", "thumbnail": "https://picsum.photos/id/164/400/400", "price": "$350,000" },

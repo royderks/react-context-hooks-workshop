@@ -53,7 +53,7 @@ const Hotels = ({ history }) => {
       <HotelItemsWrapper>
         {hotels &&
           hotels.map((hotel) => (
-            <HotelLink key={hotel.id} to={`hotel/${hotel.id}`}>
+            <HotelLink key={hotel.id} to={`hotel/${hotel.id}`} hotel={hotel}>
               <HotelItem data={hotel} />
             </HotelLink>
           ))}

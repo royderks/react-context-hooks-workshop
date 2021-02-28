@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SubHeader from '../Header/SubHeader';
-import ReviewItem from './ReviewItem';
+import HotelItem from '../Hotels/HotelItem';
 
 const ReviewsWrapper = styled.div`
   display: flex;
@@ -16,11 +16,30 @@ const Alert = styled.span`
 `;
 
 const Detail = ({ match, history }) => {
-  // Get this information from the API
-  const loading = true;
-  const error = false;
-  const hotel = false;
-  const reviews = []
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [hotel, setHotel] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetch(
+          `https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels/${match.params.id}`,
+        );
+        const dataJSON = await data.json();
+
+        if (data) {
+          setHotel(dataJSON);
+        }
+      } catch {
+        setError(true);
+      }
+
+      setLoading(false);
+    }
+
+    fetchData();
+  });
 
   return !loading && !error ? (
     <>
@@ -31,10 +50,12 @@ const Detail = ({ match, history }) => {
           openForm={() => history.push(`${match.url}/new`)}
         />
       )}
-      <ReviewsWrapper>
-        {reviews &&
-          reviews.map(review => <ReviewItem key={review.id} data={review} />)}
-      </ReviewsWrapper>
+      <HotelItem data={hotel} />
+
+      <p>
+        <h3>Reviews:</h3>
+      </p>
+      <ReviewsWrapper></ReviewsWrapper>
     </>
   ) : (
     <Alert>{loading ? 'Loading...' : error}</Alert>

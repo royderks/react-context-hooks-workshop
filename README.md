@@ -14,7 +14,7 @@ This project uses a JSON-based API, using [My JSON Server](https://my-json-serve
 
 Hint: the hotel information is available on [https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels](https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels).
 
-
+2. Now the application is displaying a list of hotels, when you click on one of the hotels you'll navigate to a detail page. That information is now being passed to it from the local state in `Hotels.js`. Instead, you need to fetch the data from an individual hotel on this page by adding one or multiple `useState` Hooks to `Detail.js`.
 
 
 
