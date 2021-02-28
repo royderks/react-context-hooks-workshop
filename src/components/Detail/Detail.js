@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SubHeader from '../Header/SubHeader';
-import ReviewItem from './ReviewItem';
+import HotelItem from '../Hotels/HotelItem';
 
 const ReviewsWrapper = styled.div`
   display: flex;
@@ -20,7 +20,6 @@ const Detail = ({ match, history }) => {
   const loading = true;
   const error = false;
   const hotel = false;
-  const reviews = []
 
   return !loading && !error ? (
     <>
@@ -31,10 +30,10 @@ const Detail = ({ match, history }) => {
           openForm={() => history.push(`${match.url}/new`)}
         />
       )}
-      <ReviewsWrapper>
-        {reviews &&
-          reviews.map(review => <ReviewItem key={review.id} data={review} />)}
-      </ReviewsWrapper>
+      <HotelItem data={hotel} />
+
+      <h3>Reviews:</h3>
+      <ReviewsWrapper></ReviewsWrapper>
     </>
   ) : (
     <Alert>{loading ? 'Loading...' : error}</Alert>

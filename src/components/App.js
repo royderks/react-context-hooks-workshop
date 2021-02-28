@@ -1,4 +1,3 @@
-import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header/Header';
