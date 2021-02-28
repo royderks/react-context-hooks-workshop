@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import SubHeader from '../Header/SubHeader';
 import HotelItem from '../Hotels/HotelItem';
 import { useHotelsContext } from '../Hotels/HotelsContext';
+import { useReviewsContext } from './ReviewsContext';
+
 import ReviewItem from './ReviewItem';
 
 const ReviewsWrapper = styled.div`
@@ -18,14 +20,19 @@ const Alert = styled.span`
 `;
 
 const Detail = ({ match, history }) => {
-  const { loading, error, hotels, reviews, getReviews } = useHotelsContext();
+  const { loading, error, hotels } = useHotelsContext();
+  const { reviews, getReviews } = useReviewsContext();
 
   const hotel =
     hotels && hotels.find((hotel) => hotel.id.toString() === match.params.id);
 
   useEffect(() => {
-    hotel && hotel.id && getReviews(hotel.id);
-  }, [getReviews, hotel]);
+    async function fetchReviews(hotelId) {
+      await getReviews(hotelId);
+    }
+
+    hotel && hotel.id && getReviews && !reviews.length && fetchReviews(hotel.id);
+  }, [getReviews, hotel, reviews.length]);
 
   return !loading && !error ? (
     <>

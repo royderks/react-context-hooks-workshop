@@ -34,7 +34,7 @@ Hint: Where should you import this file to be able to access it from both the `H
 
 6. Everything we did so far is based on Hooks, so let's create a custom Hook. You can call this Hook `useHotelsContext` and use it instead of the built-in `useContext` Hook from React.
 
-7. 
+7. Split the data about the hotel reviews into a different `Context` object, in a new file called `ReviewsContextProvider.js`. The data about the reviews can be removed from the `HotelsContextProvider` `afterwards.
 
 
 
