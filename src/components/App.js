@@ -5,8 +5,7 @@ import Header from './Header/Header';
 import Hotels from './Hotels/Hotels';
 import Detail from './Detail/Detail';
 import Form from './Form/Form';
-import HotelsContextProvider from './Hotels/HotelsContext';
-import ReviewsContextProvider from './Detail/ReviewsContext';
+import GlobalContextProvider from './GlobalContextProvider';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,16 +27,14 @@ const App = () => (
   <>
     <GlobalStyle />
     <AppWrapper>
-      <HotelsContextProvider>
-        <ReviewsContextProvider>
-          <Header />
-          <Switch>
-            <Route exact path='/' component={Hotels} />
-            <Route path='/hotel/:id/new' component={Form} />
-            <Route path='/hotel/:id' component={Detail} />
-          </Switch>
-        </ReviewsContextProvider>
-      </HotelsContextProvider>
+      <GlobalContextProvider>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Hotels} />
+          <Route path='/hotel/:id/new' component={Form} />
+          <Route path='/hotel/:id' component={Detail} />
+        </Switch>
+      </GlobalContextProvider>
     </AppWrapper>
   </>
 );
