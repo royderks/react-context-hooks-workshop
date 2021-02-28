@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 
 export const HotelsContext = createContext(null);
 
@@ -57,6 +57,14 @@ const HotelsContextProvider = ({ children }) => {
       {children}
     </HotelsContext.Provider>
   );
+};
+
+export const useHotelsContext = () => {
+  const context = useContext(HotelsContext);
+
+  return {
+    ...context,
+  };
 };
 
 export default HotelsContextProvider;

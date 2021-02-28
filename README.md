@@ -32,7 +32,9 @@ Hint: Where should you import this file to be able to access it from both the `H
 
 5. The logic for the reviews can also be added to the `Context` for the hotels data, make the changes to also consume this information from `Detail.js`. Keep in mind that you only want to request the reviews for the hotel detail page that you currently have open.
 
+6. Everything we did so far is based on Hooks, so let's create a custom Hook. You can call this Hook `useHotelsContext` and use it instead of the built-in `useContext` Hook from React.
 
+7. 
 
 
 
