@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import SubHeader from '../Header/SubHeader';
 import FormInput from './FormInput';
@@ -17,14 +17,35 @@ const SubmitButton = styled(Button)`
 `;
 
 const Form = ({ match, history }) => {
-  const [title, setTitle] = React.useState('');
-  const [rating, setRating] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const [title, setTitle] = useState('');
+  const [rating, setRating] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleOnSubmit = e => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    
-    // Submit this data to the API
+
+    try {
+      const data = await fetch(
+        `https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/reviews`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            title,
+            rating,
+            description,
+            id: Math.floor(Math.random() * 100),
+            hotelId: parseInt(match.params.id),
+          }),
+        },
+      );
+      const dataJSON = await data.json();
+
+      if (dataJSON.id) {
+        console.log('Success');
+      }
+    } catch {
+      console.log('Error');
+    }
 
     history.goBack();
   };
