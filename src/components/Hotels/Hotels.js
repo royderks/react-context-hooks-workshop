@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SubHeader from '../Header/SubHeader';
 import HotelItem from './HotelItem';
-import {HotelsContext} from './HotelsContext';
+import HotelsContext from './HotelsContext';
 
 const HotelItemsWrapper = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ const Alert = styled.span`
 `;
 
 const Hotels = ({ history }) => {
-  const { loading, error, hotels } = useContext(HotelsContext)
+  const { loading, error, hotels } = useContext(HotelsContext);
 
   return !loading && !error ? (
     <>
