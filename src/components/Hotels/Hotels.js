@@ -34,7 +34,7 @@ const Hotels = ({ history }) => {
         );
         const dataJSON = await data.json();
 
-        if (data) {
+        if (dataJSON) {
           setHotels(dataJSON);
         }
       } catch {
@@ -44,8 +44,8 @@ const Hotels = ({ history }) => {
       setLoading(false);
     }
 
-    fetchData();
-  });
+    !hotels.length && fetchData();
+  }, [hotels.length]);
 
   return !loading && !error ? (
     <>
