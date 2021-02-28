@@ -26,11 +26,14 @@ Hint: Use the `match` object from React Router to get the hotel id from the url.
 
 Hint: Have a look at the `db.json` file to find all endpoints for the REST API.
 
-4. Create a new file called `HotelsContextProvider.js` and instead of adding the data for a hotel to a local state object in `Hotels.js`, put it in a `Context` object. Consume the `Context` for the hotels in `Hotels.js`.
-
-5. You can consume this same `Context` in `Detail.js`, so that you only need to make the request to get the hotel data once when navigation between different pages.
+4. Create a new file called `HotelsContextProvider.js` and instead of adding the data for a hotel to a local state object in `Hotels.js`, put it in a `Context` object. Consume the `Context` for the hotels in `Hotels.js`. You can consume this same `Context` in `Detail.js`, so that you only need to make the request to get the hotel data once when navigation between different pages.
 
 Hint: Where should you import this file to be able to access it from both the `Hotels.js` and `Detail.js` file?
+
+5. The logic for the reviews can also be added to the `Context` for the hotels data, make the changes to also consume this information from `Detail.js`. Keep in mind that you only want to request the reviews for the hotel detail page that you currently have open.
+
+
+
 
 
 
