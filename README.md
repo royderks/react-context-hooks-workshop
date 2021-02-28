@@ -8,15 +8,24 @@ yarn && yarn start
 
 This project uses a JSON-based API, using [My JSON Server](https://my-json-server.typicode.com/), which uses the file `db.json` to create a REST API. You can use GET, POST, PUT, PATCH and DELETE. But keep in mind that changes aren't persisted between calls.
 
+### Libraries used
+
+- [React Router 5](https://reactrouter.com/web/guides/quick-start)
+
+
 ### Excercises
 
 1. Try running this application, what do you see? To display data on this page (`/`), you need to request the data from the API and put it in a local state object e.g. with `useState`.
 
 Hint: the hotel information is available on [https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels](https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels).
 
-2. Now the application is displaying a list of hotels, when you click on one of the hotels you'll navigate to a detail page. That information is now being passed to it from the local state in `Hotels.js`. Instead, you need to fetch the data from an individual hotel on this page by adding one or multiple `useState` Hooks to `Detail.js`.
+2. Now the application is displaying a list of hotels, when you click on one of the hotels you'll navigate to a detail page. You need to fetch the data from an individual hotel on this page by adding one or multiple `useState` Hooks to `Detail.js`.
 
+Hint: Use the `match` object from React Router to get the hotel id from the url.
 
+3. Also, get the reviews for this hotel from the REST API. You can render these inside the `ReviewWrapper` component, and use the already exisiting `ReviewItem` component to display them.
+
+Hint: Have a look at the `db.json` file to find all endpoints for the REST API.
 
 
 
