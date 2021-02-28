@@ -1,8 +1,8 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 
-export const HotelsContext = createContext(null);
+const HotelsContext = createContext(null);
 
-const HotelsContextProvider = ({ children }) => {
+export const HotelsContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [hotels, setHotels] = useState([]);
@@ -16,7 +16,7 @@ const HotelsContextProvider = ({ children }) => {
         );
         const dataJSON = await data.json();
 
-        if (data) {
+        if (dataJSON) {
           setHotels(dataJSON);
         }
       } catch {
@@ -36,7 +36,7 @@ const HotelsContextProvider = ({ children }) => {
       );
       const dataJSON = await data.json();
 
-      if (data) {
+      if (dataJSON) {
         setReviews(dataJSON);
       }
     } catch {
@@ -59,4 +59,12 @@ const HotelsContextProvider = ({ children }) => {
   );
 };
 
-export default HotelsContextProvider;
+export const useHotelsContext = () => {
+  const context = useContext(HotelsContext);
+
+  return {
+    ...context,
+  };
+};
+
+export default HotelsContext;
