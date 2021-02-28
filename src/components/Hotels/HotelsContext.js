@@ -1,12 +1,11 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 
-export const HotelsContext = createContext(null);
+const HotelsContext = createContext(null);
 
-const HotelsContextProvider = ({ children }) => {
+export const HotelsContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [hotels, setHotels] = useState([]);
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -16,7 +15,7 @@ const HotelsContextProvider = ({ children }) => {
         );
         const dataJSON = await data.json();
 
-        if (data) {
+        if (dataJSON) {
           setHotels(dataJSON);
         }
       } catch {
@@ -29,29 +28,12 @@ const HotelsContextProvider = ({ children }) => {
     !hotels.length && fetchData();
   }, [hotels.length]);
 
-  const getReviews = async (hotelId) => {
-    try {
-      const data = await fetch(
-        `https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels/${hotelId}/reviews`,
-      );
-      const dataJSON = await data.json();
-
-      if (data) {
-        setReviews(dataJSON);
-      }
-    } catch {
-      setError(true);
-    }
-  };
-
   return (
     <HotelsContext.Provider
       value={{
         loading,
         error,
         hotels,
-        reviews,
-        getReviews,
       }}
     >
       {children}
@@ -67,4 +49,4 @@ export const useHotelsContext = () => {
   };
 };
 
-export default HotelsContextProvider;
+export default HotelsContext;
