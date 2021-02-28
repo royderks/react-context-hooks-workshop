@@ -5,7 +5,7 @@ import Header from './Header/Header';
 import Hotels from './Hotels/Hotels';
 import Detail from './Detail/Detail';
 import Form from './Form/Form';
-import HotelsContextProvider from './Hotels/HotelsContext';
+import { HotelsContextProvider } from './Hotels/HotelsContext';
 
 const GlobalStyle = createGlobalStyle`
   body {

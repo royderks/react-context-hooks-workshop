@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import SubHeader from '../Header/SubHeader';
 import HotelItem from '../Hotels/HotelItem';
-import { HotelsContext } from '../Hotels/HotelsContext';
+import HotelsContext from '../Hotels/HotelsContext';
 import ReviewItem from './ReviewItem';
 
 const ReviewsWrapper = styled.div`
@@ -34,7 +34,7 @@ const Detail = ({ match, history }) => {
         );
         const dataJSON = await data.json();
 
-        if (data) {
+        if (dataJSON) {
           setReviews(dataJSON);
         }
       } catch {
