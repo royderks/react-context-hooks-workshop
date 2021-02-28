@@ -23,9 +23,30 @@ Hint: the hotel information is available on [https://my-json-server.typicode.com
 
 Hint: Use the `match` object from React Router to get the hotel id from the url.
 
-3. Also, get the reviews for this hotel from the REST API. You can render these inside the `ReviewWrapper` component, and use the already exisiting `ReviewItem` component to display them.
+Also, get the reviews for this hotel from the REST API. You can render these inside the `ReviewWrapper` component, and use the already exisiting `ReviewItem` component to display them.
 
 Hint: Have a look at the `db.json` file to find all endpoints for the REST API.
+
+3. Create a new file called `HotelsContextProvider.js` and instead of adding the data for a hotel to a local state object in `Hotels.js`, put it in a `Context` object. Where should you import this file to be able to access it from both the `Hotels.js` and `Detail.js` file?
+
+Consume the `Context` for the hotels in both `Hotels.js` and `Detail.js`, so that you only need to make the request to get the hotel data once when navigation between different pages.
+
+4. 
+
+
+
+
+
+
+
+
+
+
+
+
+4. Finally, you can use a POST request to submit a new review for any of the hotels. To do so, add the logic for this using an `useState` Hook in the file `Form.js`.
+
+
 
 
 
