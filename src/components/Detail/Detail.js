@@ -20,8 +20,12 @@ const Alert = styled.span`
 `;
 
 const Detail = ({ match, history }) => {
-  const { loading, error, hotels } = useHotelsContext();
-  const { reviews, getReviews } = useReviewsContext();
+  const { loading, error, hotels, getHotels } = useHotelsContext();
+  const { reviews, getReviews, isAdded } = useReviewsContext();
+
+  useEffect(() => {
+    (!hotels || !hotels.length) && getHotels();
+  }, [getHotels, hotels]);
 
   const hotel =
     hotels && hotels.find((hotel) => hotel.id.toString() === match.params.id);
@@ -31,7 +35,10 @@ const Detail = ({ match, history }) => {
       await getReviews(hotelId);
     }
 
-    hotel && hotel.id && getReviews && !reviews.length && fetchReviews(hotel.id);
+    hotel &&
+      hotel.id &&
+      !reviews.length &&
+      fetchReviews(hotel.id);
   }, [getReviews, hotel, reviews.length]);
 
   return !loading && !error ? (
@@ -46,6 +53,7 @@ const Detail = ({ match, history }) => {
       {hotel && <HotelItem data={hotel} />}
 
       <h3>Reviews:</h3>
+      {isAdded && <Alert>Successfully added new review!</Alert>}
       <ReviewsWrapper>
         {reviews &&
           reviews.map((review) => <ReviewItem key={review.id} data={review} />)}

@@ -1,32 +1,49 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useReducer, createContext, useContext } from 'react';
 
-export const HotelsContext = createContext(null);
+const HotelsContext = createContext(null);
 
-const HotelsContextProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [hotels, setHotels] = useState([]);
+const initialState = {
+  loading: true,
+  error: false,
+  hotels: [],
+};
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetch(
-          'https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels',
-        );
-        const dataJSON = await data.json();
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'setHotels':
+      return {
+        loading: false,
+        hotels: action.payload,
+      };
+    case 'setError':
+      return {
+        error: true,
+      };
+    default:
+      return state;
+  }
+};
 
-        if (data) {
-          setHotels(dataJSON);
-        }
-      } catch {
-        setError(true);
+export const HotelsContextProvider = ({ children }) => {
+  const [{ loading, error, hotels }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
+
+  async function getHotels() {
+    try {
+      const data = await fetch(
+        'https://my-json-server.typicode.com/royderks/react-context-hooks-workshop/hotels',
+      );
+      const dataJSON = await data.json();
+
+      if (dataJSON) {
+        dispatch({ type: 'setHotels', payload: dataJSON });
       }
-
-      setLoading(false);
+    } catch {
+      dispatch({ type: 'setError' });
     }
-
-    !hotels.length && fetchData();
-  }, [hotels.length]);
+  }
 
   return (
     <HotelsContext.Provider
@@ -34,6 +51,7 @@ const HotelsContextProvider = ({ children }) => {
         loading,
         error,
         hotels,
+        getHotels,
       }}
     >
       {children}
@@ -49,4 +67,4 @@ export const useHotelsContext = () => {
   };
 };
 
-export default HotelsContextProvider;
+export default HotelsContext;
