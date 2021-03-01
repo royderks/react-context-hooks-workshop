@@ -35,11 +35,16 @@ const Detail = ({ match, history }) => {
       await getReviews(hotelId);
     }
 
-    hotel &&
+    if (
+      hotel &&
       hotel.id &&
-      !reviews.length &&
+      (!reviews.length ||
+        (reviews.length &&
+          reviews.find((review) => review.hotelId !== hotel.id)))
+    ) {
       fetchReviews(hotel.id);
-  }, [getReviews, hotel, reviews.length]);
+    }
+  }, [getReviews, hotel, reviews]);
 
   return !loading && !error ? (
     <>
