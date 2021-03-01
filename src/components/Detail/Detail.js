@@ -26,8 +26,8 @@ const Detail = ({ match, history }) => {
     hotels && hotels.find((hotel) => hotel.id.toString() === match.params.id);
 
   useEffect(() => {
-    hotel && hotel.id && getReviews(hotel.id);
-  }, [getReviews, hotel]);
+    hotel && hotel.id && !reviews.length && getReviews(hotel.id);
+  }, [getReviews, hotel, reviews.length]);
 
   return !loading && !error ? (
     <>
